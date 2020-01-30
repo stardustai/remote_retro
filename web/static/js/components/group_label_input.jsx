@@ -22,6 +22,7 @@ const GroupLabelInput = ({ groupWithAssociatedIdeasAndVotes, actions }) => (
     <div className="instruction">
       <span className="keyboard-key">tab</span> to submit
     </div>
+    <i className="check icon" />
   </div>
 )
 
