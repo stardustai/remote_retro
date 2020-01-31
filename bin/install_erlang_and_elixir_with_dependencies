@@ -33,7 +33,7 @@ printGreenLine "asdf: configuring KERL options...";
 # see https://github.com/asdf-vm/asdf-erlang/issues/82#issuecomment-535868497 for configuring KERL
   # brew's openssl versions are structured as follows: [numerical_major].[numerical_minor].[alphanumeric_patch]
 brew_open_ssl_version=$(brew info openssl | egrep -o -m 1 '[0-9]+.[0-9]*[^\S]* ' | awk '{print $3}')
-export KERL_CONFIGURE_OPTIONS="--with-ssl=/usr/local/Cellar/openssl/$brew_open_ssl_version"
+export KERL_CONFIGURE_OPTIONS="--without-javac --with-ssl=/usr/local/Cellar/openssl/$brew_open_ssl_version"
 
 printGreenLine "asdf: installing Erlang version declared in \`.tool-versions\`\n\n\tNOTE: Building erlang takes 5-10 minutes. Be patient.";
 erlang_version=$(awk '/erlang/ { print $2 }' .tool-versions) && asdf install erlang ${erlang_version}
