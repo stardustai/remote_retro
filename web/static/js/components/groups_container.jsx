@@ -7,6 +7,7 @@ import { selectors } from "../redux/index"
 
 import LowerThird from "./lower_third"
 import IdeaGroup from "./idea_group"
+import CategoryColumn from "./category_column"
 
 import * as AppPropTypes from "../prop_types"
 import styles from "./css_modules/groups_container.css"
@@ -34,17 +35,25 @@ export const GroupsContainer = props => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.groupsWrapper}>
-        {groupsSorted.map(groupWithAssociatedIdeasAndVotes => (
-          <IdeaGroup
-            actions={actions}
-            currentUser={currentUser}
-            currentUserHasExhaustedVotes={currentUserHasExhaustedVotes}
-            key={groupWithAssociatedIdeasAndVotes.id}
-            stage={stage}
-            groupWithAssociatedIdeasAndVotes={groupWithAssociatedIdeasAndVotes}
-          />
-        ))}
+      <div className={styles.flexContainerForGroupsAndOptionallyActionItems}>
+        <div className={styles.groupsWrapper}>
+          {groupsSorted.map(groupWithAssociatedIdeasAndVotes => (
+            <IdeaGroup
+              actions={actions}
+              currentUser={currentUser}
+              currentUserHasExhaustedVotes={currentUserHasExhaustedVotes}
+              key={groupWithAssociatedIdeasAndVotes.id}
+              stage={stage}
+              groupWithAssociatedIdeasAndVotes={groupWithAssociatedIdeasAndVotes}
+            />
+          ))}
+        </div>
+
+        <CategoryColumn
+          category="action-item"
+          currentUser={currentUser}
+          stage={stage}
+        />
       </div>
 
       <LowerThird {...props} />
