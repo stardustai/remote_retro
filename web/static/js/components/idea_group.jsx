@@ -36,9 +36,10 @@ class IdeaGroup extends Component {
     const ideaToCastVoteFor = groupWithAssociatedIdeasAndVotes.ideas[0]
     const isVotingStage = stage === LABELING_PLUS_VOTING
     const listContainerClasses = cx("list-container", { overflowed: listIsOverflowed })
-
+    const grayedOutStyle = groupWithAssociatedIdeasAndVotes.votes.length === 0
+      ? styles.grayedOut : null
     return (
-      <div className={`idea-group ${styles.wrapper}`}>
+      <div className={`idea-group ${styles.wrapper} ${grayedOutStyle}`}>
         <GroupLabelContainer
           actions={actions}
           currentUser={currentUser}

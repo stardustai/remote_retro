@@ -36,3 +36,7 @@
     }
   }
 }
+
+.grayed-out {
+  opacity: 0.5
+}

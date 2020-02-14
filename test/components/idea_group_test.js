@@ -1,7 +1,7 @@
 import React from "react"
 import { shallow } from "enzyme"
-
 import IdeaGroup from "../../web/static/js/components/idea_group"
+import styles from "../../web/static/js/components/css_modules/idea_group.css"
 
 describe("IdeaGroup component", () => {
   const defaultProps = {
@@ -19,6 +19,25 @@ describe("IdeaGroup component", () => {
         body: "Memetown",
       }],
       votes: [],
+    },
+    stage: "action-items",
+  }
+
+  const propsWithVotes = {
+    actions: {},
+    currentUser: {},
+    currentUserHasExhaustedVotes: false,
+    groupWithAssociatedIdeasAndVotes: {
+      id: 5,
+      label: "Internet Culture",
+      ideas: [{
+        id: 1,
+        body: "I like turtles",
+      }, {
+        id: 2,
+        body: "Memetown",
+      }],
+      votes: [{}],
     },
     stage: "action-items",
   }
@@ -88,6 +107,27 @@ describe("IdeaGroup component", () => {
       const votingInterface = wrapper.find("VotingInterface")
 
       expect(votingInterface.prop("isVotingStage")).to.eql(false)
+    })
+  })
+
+  describe("when in action-items or close stage", () => {
+    it("renders grayed-out if it has zero votes", () => {
+      const wrapper = shallow(
+        <IdeaGroup
+          {...defaultProps}
+          stage="action-items"
+        />
+      )
+      expect(wrapper.hasClass(styles.grayedOut)).to.equal(true)
+    })
+    it("doesn't render grayed-out if it has one or more votes", () => {
+      const wrapper = shallow(
+        <IdeaGroup
+          {...propsWithVotes}
+          stage="action-items"
+        />
+      )
+      expect(wrapper.hasClass(styles.grayedOut)).to.equal(false)
     })
   })
 
